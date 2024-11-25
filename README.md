@@ -83,9 +83,61 @@ answer = model.generate_content(prompt)
 Markdown(answer.text)
 ```
 
-## Agents
+## Agents and Function Calling
+Use the Gemini API's automatic function calling to build a chat interface over a local database. 
+
+```
+db_tools = [list_tables, describe_table, execute_query]
+
+instruction = """You are a helpful chatbot that can interact with an SQL database for a computer
+store. You will take the users questions and turn them into SQL queries using the tools
+available. Once you have the information you need, you will answer the user's question using
+the data returned. Use list_tables to see what tables are present, describe_table to understand
+the schema, and execute_query to issue an SQL SELECT query."""
+
+model = genai.GenerativeModel(
+    "models/gemini-1.5-flash-latest", tools=db_tools, system_instruction=instruction
+)
+```
+
+```
+# Start a chat with automatic function calling enabled.
+chat = model.start_chat(enable_automatic_function_calling=True)
+```
+
+```
+resp = chat.send_message("What is the cheapest product?", request_options=retry_policy)
+print(resp.text)
+```
+
+```
+- DB CALL: list_tables
+ - DB CALL: describe_table
+ - DB CALL: execute_query
+The cheapest product is the Mouse, costing $29.99.
+```
 
 ## LangGraph
+LangGraph applications are built around a **graph** structure. As the developer, you define an application graph that models the state transitions for your application. Your app will define a **state** schema, and an instance of that schema is propagated through the graph.
+
+Each **node** in the graph represents an action or step that can be taken. Nodes will make changes to the state in some way through code that you define. These changes can be the result of invoking an LLM, by calling an API, or executing any logic that the node defines.
+
+Each **edge** in the graph represents a transition between states, defining the flow of the program. Edge transitions can be fixed, for example if you define a text-only chatbot where output is always displayed to a user, you may always transition from chatbot -> user. The transitions can also be conditional, allowing you to add branching (like an if-else statement) or looping (like for or while loops).
+
+LangGraph is highly extensible and provides a number of features such as memory, persistance and streaming.
+
+```
+# Set up the initial graph based on our state definition.
+graph_builder = StateGraph(OrderState)
+
+# Add the chatbot function to the app graph as a node called "chatbot".
+graph_builder.add_node("chatbot", chatbot)
+
+# Define the chatbot node as the app entrypoint.
+graph_builder.add_edge(START, "chatbot")
+
+chat_graph = graph_builder.compile()
+```
 
 ## Fine-Tuning
 
