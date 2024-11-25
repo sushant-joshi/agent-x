@@ -30,60 +30,60 @@ Deep dive into Generative AI with the 5 day Google workshop conducted on Kaggle.
 
 ## Google Gemini API
 
-# Evolution of LLM Models
-GPT 1
+## Evolution of LLM Models
+- GPT 1
 	- Unsupervised PreTraining
 	- Unlabelled Text
 
-GPT 2 
+- GPT 2 
 	- 10 times larger dataset for training, 10 times the parameters, larger brain, whole universe of text
 	- generate super realistic texts, coherent, accuracy
 
-GPT 3
+- GPT 3
 	- 175 billlion parameters
 	- Few shot learning
 	- no need for mountains of labelled data
 
-GPT 3.5 and 4
+- GPT 3.5 and 4
 	- Doubled down on dialogue, multi modal 
 	- Handle images and text as well - Multi Modal
 	- longer context window
 	- remember longer
 
-LamDA - Language Model for Dialogue Applications
+- LamDA - Language Model for Dialogue Applications
 	- smooth talker
 	- natural sounding , human sounding, less robotic
 
-Gopher
+- Gopher
 	- refining the training process
 	- data quality and optimization
 
-PalM Pathways Language Model
+- PalM Pathways Language Model
 	- 540 billion parameters
 	- Common sense reasoning
 	- Arithmetic Reasoning
 	
-PalM-2
+- PalM-2
 	- code generation
 	- works with fewer parameters
 	- Smarter, better reasoning, code generation
 
-Gemini
+- Gemini
 	- multi modal 
 	- text, video, audio
 	- Swiss Army knife
 	- millions of tokens
 
-Gemini Nano
+- Gemini Nano
 	- AI to smaller devices like Smartphones and Wearables
 
-Meta
+- Meta
 	- Llama
 
-Mistral AI
+- Mistral AI
 	- MistralLM
 
-xAI
+- xAI
 	- Grok1
 
 ## Fine Tuning Techniques
